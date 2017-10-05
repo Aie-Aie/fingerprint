@@ -43,7 +43,7 @@ def viewevents(data):
     recs=[]
 
     for r in res:
-        recs.append({'studid':r[0], 'event':r[1], 'eventdate':r[1], 'signin':r[2], 'signout':r[3]})
+        recs.append({'studid':r[0], 'event':r[1], 'eventdate':r[2], 'signin':r[3], 'signout':r[4]})
     return jsonify({'status':'ok', 'entries': recs, 'count': len(recs)})
 
 
