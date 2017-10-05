@@ -2115,7 +2115,7 @@ fieldset[disabled] a.btn {
 .btn-primary {
     color: #fff;
     background-color: #007bff;
-    border-color: #007bff
+    border-color: #800000
 }
 
 .btn-primary:hover {
@@ -2132,7 +2132,7 @@ fieldset[disabled] a.btn {
 .btn-primary.disabled,
 .btn-primary:disabled {
     background-color: #007bff;
-    border-color: #007bff
+    border-color: #800000
 }
 
 .btn-primary.active,
@@ -4047,7 +4047,7 @@ tbody.collapse.show {
     padding: .75rem 1rem;
     margin-bottom: 1rem;
     list-style: none;
-    background-color: #e9ecef;
+    background-color: #f7eaea;
     border-radius: .25rem
 }
 
@@ -4065,7 +4065,7 @@ tbody.collapse.show {
     display: inline-block;
     padding-right: .5rem;
     padding-left: .5rem;
-    color: #868e96;
+    color: #a38c8c;
     content: "/"
 }
 
@@ -4078,7 +4078,7 @@ tbody.collapse.show {
 }
 
 .breadcrumb-item.active {
-    color: #868e96
+    color: #a38c8c
 }
 
 .pagination {
@@ -4103,12 +4103,12 @@ tbody.collapse.show {
 .page-item.active .page-link {
     z-index: 2;
     color: #fff;
-    background-color: #007bff;
-    border-color: #007bff
+    background-color: #800000;
+    border-color: #800000
 }
 
 .page-item.disabled .page-link {
-    color: #868e96;
+    color: #a38c8c;
     pointer-events: none;
     background-color: #fff;
     border-color: #ddd
@@ -4120,14 +4120,14 @@ tbody.collapse.show {
     padding: .5rem .75rem;
     margin-left: -1px;
     line-height: 1.25;
-    color: #007bff;
+    color: #800000;
     background-color: #fff;
     border: 1px solid #ddd
 }
 
 .page-link:focus,
 .page-link:hover {
-    color: #0056b3;
+    color: #540000;
     text-decoration: none;
     background-color: #e9ecef;
     border-color: #ddd
@@ -4603,7 +4603,7 @@ a.list-group-item-primary.active,
 button.list-group-item-primary.active {
     color: #fff;
     background-color: #004085;
-    border-color: #004085
+    border-color: #8e1212
 }
 
 .list-group-item-secondary {
@@ -4628,7 +4628,7 @@ a.list-group-item-secondary.active,
 button.list-group-item-secondary.active {
     color: #fff;
     background-color: #464a4e;
-    border-color: #464a4e
+    border-color: #5b4848
 }
 
 .list-group-item-success {
@@ -5597,7 +5597,7 @@ a.bg-dark:hover {
 }
 
 .border-primary {
-    border-color: #007bff!important
+    border-color: #800000!important
 }
 
 .border-secondary {

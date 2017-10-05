@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, shrink-to-fit=no" name="viewport">
+
+	<title>CLEARANCE</title>
+	<link rel="icon" href="assets/img/microchip.png">
+
+	<!--FONTS/ICONS-->
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
+	<!--OFFLINE CSS-->
+	<link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/now-ui-kit.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/dataTables.bootstrap4.css">
+	<link rel="stylesheet" href="assets/css/table/jquery.dataTables.css">
+</head>
+<body class="landing-page sidebar-collapse">
+	
+	<!--START NAVBAR-->
+	<nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent" color-on-scroll="40">
+		<div class="container">
+			<div class="navbar-translate">
+				<a class="navbar-brand" rel="tooltip" title="Wanna see attended events?" data-placement="bottom" target="_blank" href="landing_page.html">
+					MSU-IIT COE&amp;T
+				</a>
+				<button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-bar bar1"></span>
+					<span class="navbar-toggler-bar bar2"></span>
+					<span class="navbar-toggler-bar bar3"></span>
+				</button>
+			</div>
+			<div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="assets/img/blurred-image-1.jpg">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" href="admin_events.html">
+							<i class="now-ui-icons sport_trophy"></i>
+							<p>Events</p>
+						</a>
+					</li>
+					<!--INSERT CLEARANCE PAGE URL-->
+					<li class="nav-item active">
+						<a class="nav-link" href="admin_clearance.html">
+							<i class="now-ui-icons education_paper"></i>
+							<p>Clearance</p>
+						</a>
+					</li>
+					<!--BACKEND: ADMIN LOGOUT-->
+					<li class="nav-item" action="">
+						<a class="nav-link" href="">
+							<i class="now-ui-icons media-1_button-power" aria-hidden="true"></i>
+							<p>Logout</p>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!--END NAVBAR-->
+
+	<!--START PAGE HEADER-->
+	<div class="wrapper">
+		<div class="page-header page-header-small clear-filter" filter-color="orange">
+			<div class="page-header-image" data-parallax="true" style="background-image: url(assets/img/bg4.jpg);">
+			</div>
+			<div class="container">
+				<div class="content-center brand">
+					<img class="n-logo" src="assets/img/education-glyph-1-20-512.png" alt="">
+					<h1 class="h1-seo">College of Engineering and Technology</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--END PAGE HEADER-->
+
+	<!--START CONTENT-->
+	<div class="main">
+		<div class="container">
+			<div class="row" style="padding-top: 20px; padding-bottom: 20px;">
+				<div class="col-md-6">
+					<!--TRIGGER ADD LIABILITY MODAL-->
+					<button id="addLiability" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAddLia">
+						Add Liability
+					</button>
+
+					<!--BACKEND PLEASE-->
+					<!--ON CLICK OF:
+						***OPEN BUTTON = OPENS TABLE (AT THE RIGHT SIDE) OF THE SPECIFIC LIABILITY
+						***EDIT BUTTON = OPENS MODAL AND CAN EDIT LIABILITY NAME AND DATE HOWEVER THE INITIAL DATAS ARE VISIBLE
+						***DELETE BUTTON = DELETES THE ROW DATA-->
+					<!--LIABILITY DATATABLE-->
+					<div class="dataTables_wrapper container-fluid form-inline dt-bootstrap" style="padding-top: 20px; padding-left: 0; padding-right: 0; font-size: 12px;">
+						<table id="data" class="table table-bordered table-striped table-hover display" cellspacing="0" width="100%" role="grid" aria-describedby="datatable_info">
+							<thead>
+								<tr>
+									<th>Liability</th>
+									<th>Date Issued</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Kasama Assessment Fee</td>
+									<td>04/23/2017</td>
+									<td>
+										<button type="button" class="btn btn-simple btn-sm studClearance" data-target="#openLiability" style="font-size: 10px;">
+													Open
+										</button>
+										<button type="button" class="btn btn-simple btn-sm" id="editLiability" data-toggle="modal" data-target="#modalEditLia" style="font-size: 10px;">
+											Edit
+										</button>
+										<button type="button" class="btn btn-simple btn-sm" style="font-size: 10px;">
+											Delete
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td>COE EC ASSESSMENT FEE</td>
+									<td>05/02/2017</td>
+									<td>
+										<button type="button" class="btn btn-simple btn-sm studClearance" data-target="#openLiability" style="font-size: 10px;">
+											Open
+										</button>
+										<button type="button" class="btn btn-simple btn-sm" id="editLiability" data-toggle="modal" data-target="#modalEditLia" style="font-size: 10px;">
+											Edit
+										</button>
+										<button type="button" class="btn btn-simple btn-sm" style="font-size: 10px;">
+											Delete
+										</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<!--OPENED STUDENT CLEARANCE TABLE FOR STATUS EDITING-->
+				<!--LIST OF STUDENTS THAT CAN BE EDITED IF THEY ARE PAID OR NOT AND INPUT THE PAYMENT DATE (IF NOT YET PAID, MM/DD/YYYY IS INITIALLY VISIBLE). HOWEVER, ADMIN CAN'T PERFORM DELETION OF DATA.
+					*** THIS TABLE CAN BE DISPLAYED ONLY IF THE OPEN BUTTON PER LIABILITY IS TRIGGERED.-->
+				<div id="openLiability" class="col-md-6" style="display: none;">
+					<!--H5 VALUE SHOULD BE CHANGED DEPENDING ON THE NAME OF THE LIABILITY THAT IS OPENED-->
+					<h5 class="title title-up">Kasama Assessment Fee</h5>
+					<div class="dataTables_wrapper container-fluid form-inline dt-bootstrap" style="padding-top: 20px; padding-left: 0; padding-right: 0; font-size: 12px;">
+						<table id="data" class="table table-bordered table-striped table-hover display" cellspacing="0" width="100%" role="grid" aria-describedby="datatable_info">
+							<thead>
+								<tr>
+									<th style="width: 50px; font-size: 10px;">ID No.</th>
+									<th>Name</th>
+									<th style="width: 10px; font-size: 12px;">Date Cleared</th>
+									<th style="width: 5px;">Status</th>
+									<th style="width: 5px;">Action</th>
+								</tr>
+							</thead>
+							<tbody action="" >
+								<tr>
+									<td>2013-1111</td>
+									<td>Olla Espanya</td>
+									<td>11/23/2017</td>
+									<td>Cleared</td>
+									<td>
+										<button type="button" class="btn btn-simple btn-sm" id="minimodal" data-toggle="modal" data-target="#mmodEditStat" style="font-size: 10px;">
+											Edit
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td>2014-2222</td>
+									<td>Hakuna Matata</td>
+									<td>01/25/2017</td>
+									<td>Not Cleared</td>
+									<td>
+										<button type="button" class="btn btn-simple btn-sm" id="minimodal" data-toggle="modal" data-target="#mmodEditStat" style="font-size: 10px;">
+											Edit
+										</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!--END CONTENT-->
+
+	<!--=============== M O D A L S ===============-->
+
+	<!--ADD LIABILITY MODAL-->
+	<div class="modal fade" id="modalAddLia" tabindex="-1" role="dialog" aria-labelledby="modAddLia" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!--MODAL HEADER-->
+				<div class="modal-header justify-content-center">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						<i class="now-ui-icons ui-1_simple-remove"></i>
+					</button>
+					<h4 class="title title-up" id="modAddLia">Add Liability</h4>
+				</div>
+
+				<!--MODAL BODY-->
+				<!--BACKEND: ADDING LIABILITY-->
+				<div class="modal-body">
+					<form id="addLia" role="form" action="#" method="post" name="form">
+						<div class="form-group input-lg">
+							<label for="liaName">Liability</label>
+							<input type="text" class="form-control" name="liaName" placeholder="e.g. COE Assessment Fee" form="addLia" required="true">
+						</div>
+						<div class="form-group input-lg">
+							<label for="liaDate">Date</label>
+							<input type="date" class="form-control" name="liaDate" form="addLia" required="true">
+						</div>
+						<!--MODAL FOOTER-->
+						<div class="modal-footer">
+							<button type="button" class="btn btn-neutral" data-dismiss="modal" aria-hidden="true">
+								Cancel
+							</button>
+							<button type="submit" class="btn btn-success">
+								Add
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--EDIT LIABILITY MODAL-->
+	<div class="modal fade" id="modalEditLia" tabindex="-1" role="dialog" aria-labelledby="modEditLia" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!--MODAL HEADER-->
+				<div class="modal-header justify-content-center">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						<i class="now-ui-icons ui-1_simple-remove"></i>
+					</button>
+					<h4 class="title title-up" id="modEditLia">Add Liability</h4>
+				</div>
+
+				<!--MODAL BODY-->
+				<!--BACKEND: EDITING LIABILITY
+					***AS THE MODAL OPENS, THE INITIAL VALUES WILL BE VISIBILE-->
+				<div class="modal-body">
+					<form id="editLia" role="form" action="#" method="post" name="form">
+						<div class="form-group input-lg">
+							<label for="liaName">Liability</label>
+							<input type="text" class="form-control" name="liaName" placeholder="e.g. COE Assessment Fee" form="editLia" required="true">
+						</div>
+						<div class="form-group input-lg">
+							<label for="liaDate">Date</label>
+							<input type="date" class="form-control" name="liaDate" form="editLia" required="true">
+						</div>
+						<!--MODAL FOOTER-->
+						<div class="modal-footer">
+							<button type="button" class="btn btn-neutral" data-dismiss="modal" aria-hidden="true">
+								Cancel
+							</button>
+							<button type="submit" class="btn btn-success">
+								Okay
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--EDIT CLEARANCE STATUS MINI MODAL-->
+	<div class="modal fade modal-mini modal-primary" id="mmodEditStat" tabindex="-1" role="dialog" aria-labelledby="modEditStat" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!--MINI MODAL HEADER-->
+				<div class="modal-header justify-content-center">
+					<h4 class="title title-up" id="modEditStat">
+						Edit Status
+					</h4>
+				</div>
+
+				<!--MINI MODAL BODY-->
+				<!--BACKEND: EDITING STATUS
+					***AS THE MODAL OPENS, THE INITIAL VALUES WILL BE VISIBILE-->
+				<div class="modal-body">
+					<form id="editStat" role="form" action="#" method="post" name="form">
+						<div class="checkbox">
+							<input type="checkbox" id="checkCleared">
+							<label for="checkCleared">Cleared</label>
+						</div>
+						<div class="form-group input-lg">
+							<label for="statDate">Date</label>
+							<input type="date" class="form-control" name="statDate" form="editStat" required="true">
+						</div>
+						<!--MINI MODAL FOOTER-->
+						<div class="modal-footer">
+							<button type="button" class="btn btn-link btn-neutral" data-dismiss="modal" aria-hidden="true">
+								Cancel
+							</button>
+							<button type="submit" class="btn btn-warning">
+								Submit
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--FOOTER-->
+	<footer class="footer footer-default">
+		<div class="container">
+			<div class="copyright">
+				<span>&copy; Hakuna Matata</span>
+			</div>
+		</div>
+	</footer>
+</body>
+<!--OFFLINE SCRIPTS-->
+<script src="./assets/js/core/jquery.3.2.1.min.js" type="text/javascript"></script>
+<script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
+<script src="./assets/js/core/bootstrap.min.js" type="text/javascript"></script>
+<script src="./assets/js/now-ui-kit.js?v=1.1.0" type="text/javascript"></script>
+<script src="./assets/js/jquery.dataTables.js" type="text/javascript"></script>
+<script src="./assets/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
+
+</html>

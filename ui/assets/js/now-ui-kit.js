@@ -97,19 +97,18 @@ $(document).ready(function() {
         });
     });
 
-    //if submit button is clicked without inputs, return to blank field
-    $("#form").submit(function(e){
-        if ($.trim($(".form-control").val()) === "") {
-            e.preventDefault();
-            alert('Please input id number')
-        }
+
+    /* MY SPACE!*/
+    $("table.display").DataTable();
+
+    $("#sendbtn").click(function() {
+        $("#attendedTB, #errorAlert").show();
     });
 
-    //display table on successful click of submit button
-    /*
-    $("#viewattendance").click(function(){
-        $("#attendedTB").show();
-    });*/
+    $(".studClearance").click(function() {
+        $("#openLiability").show();
+    });
+    /*END MY SPACE*/
 });
 
 $(window).on('resize', function() {
