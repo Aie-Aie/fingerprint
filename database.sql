@@ -162,24 +162,6 @@ create or replace function newevent(parID text, parEVENT text, parIN text, parOU
 	language 'plpgsql'
 --select newevent('2013-1364', 'COE2 Week 2017', 'yes', 'no')
 
-create or replace function dropEmployee(par_id int8) returns text as
-    $$
-        declare
-            loc_id text;
-            loc_res text;
-        begin
-            select into loc_id id from employees where id =par_id;
-            if loc_id isnull then
-                loc_res ='Data Not Found.';
-            else
-
-				delete from employees where id= par_id;
-                loc_res ='Data deleted';
-            end if;
-                return loc_res;
-		end;
-    $$
-        language 'plpgsql';
 
 create or replace function dropEvent(parEvent text) returns text as
 	$$
@@ -207,8 +189,14 @@ create or replace function getevents(in parID text, out text, out text, out text
 		select  studentInfo.firstname, studentInfo.lastname, events.event, events.eventdate, events.signin, events.signout from events, studentInfo where studentInfo.studid = parID and studentInfo.studid = events.studid;
 	$$
 	language 'sql';
-
 --select getevents('2013-1364')
+
+create or replace function getliststudsinevent(in parEvent text, out text, out text, out text, out text) returns setof record as
+	$$
+		select events.studid, studentInfo.course, events.signin, events.signout from studentInfo, events where events.event = parEvent and events.studid =studentInfo.studid;
+	$$
+	language 'sql';
+
 
 create or replace function getstudentdata(in parID text, out text, out text, out text, out text) returns setof record as
 	$$
