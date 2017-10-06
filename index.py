@@ -36,14 +36,16 @@ def index():
 #view events given an id
 @app.route('/events/<string:data>', methods=['GET'])
 def viewevents(data):
+    
     res= spcall('getevents', (data, ), True)
+
     if 'Error' in str(res[0][0]):
         return jsonify({'status':'error', 'message':res[0][0]})
 
     recs=[]
 
     for r in res:
-        recs.append({'studid':r[0], 'event':r[1], 'eventdate':r[2], 'signin':r[3], 'signout':r[4]})
+        recs.append({'firstname':r[0], 'lastname':r[1], 'event':r[2], 'eventdate':r[3], 'signin':r[4], 'signout':r[5]})
     return jsonify({'status':'ok', 'entries': recs, 'count': len(recs)})
 
 
@@ -59,7 +61,14 @@ def viewstuddata(data):
         recs.append({'studid':r[0], 'firstname':r[1], 'lastname':r[2], 'course':r[3]})
     return jsonify({'status':'ok', 'entries':recs, 'count':len(recs)})
 
-#add student
+@app.route('/access', methods =['POST'])
+def signin():
+    uname = request.form['admin']
+    pwd =request.form['password']
+
+    res =spcall('checkaccess', (uname, pwd), True)
+
+    return jsonify({'status': res[0][0]})
 
 
 @app.after_request
