@@ -71,15 +71,15 @@ function signin(){
 			password:pwd
 		},
 		success: function(resp){
-			$('#sform').hide();
+			
 			if(resp.status == 'Granted'){
-				
+				$('#sform').hide();
 				$('.section').show();
 				$('.main').show();
 			}
 			else{
+				$('#errorAlert').show();
 				
-				$('#sform').hide();
 			}
 		},
 		error: function(err){
