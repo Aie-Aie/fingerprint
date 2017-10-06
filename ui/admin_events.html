@@ -76,6 +76,20 @@
 	</div>
 	<!--END PAGE HEADER-->
 	<div  class="section text-center" style="padding-top: 10px;">
+			<div id="errorAlert" class="alert alert-danger" role="alert" style="display: none;">
+				<div class="container">
+					<div class="alert-icon">
+						<i class="now-ui-icons objects_support-17"></i>
+					</div>
+					<strong>Oh snap!</strong>
+					The username or password is invalid. Please try again.
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span ari-hidden="true">
+							<i class="now-ui-icons ui-1_simple-remove"></i>
+						</span>
+					</button>
+				</div>
+			</div>
 			<div class="container" id="sform">
 				<h4>Admin Sign In</h4>
 				<div class="row" action="#adminsigninnibai">
@@ -99,7 +113,9 @@
 					</form>
 				</div>
 			</div>
-		</div>
+
+			
+	</div>
 	<!--START CONTENT-->
 	<div class="main" style="display: none">
 		<!--TRIGGER ADD EVENT MODAL-->
