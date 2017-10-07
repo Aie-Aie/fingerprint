@@ -101,9 +101,9 @@ $(document).ready(function() {
     /* MY SPACE!*/
     $("table.display").DataTable();
 
-    $("#sendbtn").click(function() {
+    /*$("#sendbtn").click(function() {
         $("#attendedTB, #errorAlert").show();
-    });
+    });*/
 
     $(".studClearance").click(function() {
         $("#openLiability").show();

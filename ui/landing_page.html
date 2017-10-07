@@ -15,7 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="./assets/css/now-ui-kit.css">
 	<link rel="stylesheet" type="text/css" href="./assets/css/dataTables.bootstrap4.css">
-	<link rel="stylesheet" href="assets/css/table/jquery.dataTables.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/table/jquery.dataTables.css">
 </head>
 <body class="landing-page sidebar-collapse">
 	
@@ -134,8 +134,15 @@
 				<div class="row">
 		
 					<div class="col-md-12" style="font-size: 12px;">
-						<div class="dataTables_wrapper container-fluid form-inline dt-bootsrap">
-							<table id="data" class="table table-bordered table-striped table-hover display" cellspacing="0" width="100%" role="grid" aria-describedby="datatable_info">
+						<div class="dataTables_wrapper container-fluid form-inline dt-bootsrap4">
+							<table id="data" class="table table-bordered table-striped table-hover display" cellspacing="0" width="100%" role="grid" aria-describedby="dataTables_info">
+
+								<!--ERROR: DURING ON CLICK OF SEARCH BAR & ON CLICK OF THE THEAD FOR SORTING, TABLE DISPLAYS NO DATA
+								& TABLE DISPLAYS NO DATA COUNT -->
+								<!--IN assets/js/jquery.dataTables.js, STARTING FROM LINE 14338 TO 14399:
+									***PLEASE SEE LINE 14356 & 14372 AND CTRL+F IT FOR MORE INFO ON SEARCH FILTER BAR
+									***PLEASE SEE Sorting AREA FOR MORE INFO ON THEAD SORTING
+									***PLEASE SEE LINE 14357 DATA COUNT-->
 								<thead>
 									<tr>
 										<th style="width: 300px;">Event</th>

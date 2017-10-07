@@ -76,20 +76,7 @@
 	</div>
 	<!--END PAGE HEADER-->
 	<div  class="section text-center" style="padding-top: 10px;">
-			<div id="errorAlert" class="alert alert-danger" role="alert" style="display: none;">
-				<div class="container">
-					<div class="alert-icon">
-						<i class="now-ui-icons objects_support-17"></i>
-					</div>
-					<strong>Oh snap!</strong>
-					The username or password is invalid. Please try again.
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span ari-hidden="true">
-							<i class="now-ui-icons ui-1_simple-remove"></i>
-						</span>
-					</button>
-				</div>
-			</div>
+			
 			<div class="container" id="sform">
 				<h4>Admin Sign In</h4>
 				<div class="row" action="#adminsigninnibai">
@@ -167,6 +154,7 @@
 										</button>
 									</td>
 								</tr>
+						<!--
 								<tr>
 									<td>PALAKASAN 2017</td>
 									<td>February 2, 2017</td>
@@ -192,11 +180,13 @@
 										<button class="btn btn-simple btn-sm" id="modal" data-toggle="modal" data-target="#myModal_editEvent" style="font-size: 12px;">
 											Edit
 										</button>
-										<button class="btn btn-simple btn-sm" style="font-size: 12px;">
+										<button class="btn btn-simple btn-sm" onclick= "deleteEvent();" style="font-size: 12px;">
 											Delete
 										</button>
 									</td>
 								</tr>
+
+							-->
 							</tbody>
 						</table>
 					</div>
@@ -224,24 +214,26 @@
 					<form id="addEvent" role="form" action="#" method="post">
 						<div class="form-group input-lg">
 							<label for="eventName">Event Name</label>
-							<input type="text" class="form-control" name="eventName" placeholder="e.g. GAKOP 2017" required="true" form="addEvent">
+							<input type="text" class="form-control" name="eventName" id="eventName" placeholder="e.g. GAKOP 2017" required="true" form="addEvent">
 						</div>
 						<div class="form-group input-lg">
 							<label for="eventDate">Event Date</label>
-							<input type="date" class="form-control" name="eventDate" required="true" form="addEvent">
+							<input type="date" id="eventDate" class="form-control" name="eventDate" required="true" form="addEvent">
 						</div>
 						<div class="form-group input-lg">
 							<label for="eventFile">Event File</label>
 							<br>
-							<input type="file" name="eventFile" id="eventFile" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required="true">
+							<input type="file" name="eventFile" id="eventFile" required="true">
 						</div>
+
+						<div id="byte_content"></div>
 
 						<!--MODAL FOOTER-->
 						<div class="modal-footer">
 							<button type="button" class="btn btn-neutral" data-dismiss="modal" aria-hidden="true">
 								Cancel
 							</button>
-							<button type="submit" class="btn btn-success">Add</button>
+							<button type="button" id="upload"  "class="btn btn-success">Add</button>
 						</div>
 					</form>
 				</div>

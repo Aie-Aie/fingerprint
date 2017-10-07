@@ -33,6 +33,10 @@ def spcall(query, param, commit=False):
 def index():
     return "Hello to COE PROJECT. Aja!"
 
+#@app.route('/events', methods=['GET'])
+#def addevent():
+
+
 #view events given an id
 @app.route('/events/<string:data>', methods=['GET'])
 def viewevents(data):
@@ -60,6 +64,7 @@ def viewstuddata(data):
     for r in res:
         recs.append({'studid':r[0], 'firstname':r[1], 'lastname':r[2], 'course':r[3]})
     return jsonify({'status':'ok', 'entries':recs, 'count':len(recs)})
+
 
 @app.route('/access', methods =['POST'])
 def signin():

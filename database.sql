@@ -16,27 +16,20 @@ create table studentInfo(
 
 create table events(
 	studid text references studentInfo(studid),
-	event text, 
-	eventdate timestamp,
+	event text primary key,
+	eventdate date,
 	signin text,
 	signout text
 
 )
 
-create table access(
-	
-	studid text primary key references studentInfo(studid),
-	fingerprint text
-)
 
 create table admin(
-	firstname text,
-	lastname text,
 	username text primary key,
 	password text
 )
 
-create or replace function newadmin(parfirstname text, parlastname text, paruname text, parpwd text) returns text as
+create or replace function newadmin(paruname text, parpwd text) returns text as
 	$$
 
 		declare
@@ -48,7 +41,7 @@ create or replace function newadmin(parfirstname text, parlastname text, parunam
 			
 			select into loc_id username from admin where username=paruname;
 			if loc_id isnull then
-				insert into admin(firstname, lastname, username, password) values (parfirstname, parlastname, paruname, parpwd);
+				insert into admin(username, password) values (paruname, parpwd);
 			
 				loc_res = 'OK';
 
@@ -61,7 +54,7 @@ create or replace function newadmin(parfirstname text, parlastname text, parunam
 		end;
 	$$
 	language 'plpgsql'
--- select newadmin('ailen grace', 'aspe','aaspe', 'akolagini')
+-- select newadmin('aaspe', 'akolagini')
 
 create or replace function checkaccess(paruname text, parpwd text) returns text as
 	$$
@@ -85,7 +78,7 @@ create or replace function checkaccess(paruname text, parpwd text) returns text 
 	$$
 
 	language 'plpgsql';
-select checkaccess('aaspe', 'akolagini');
+--select checkaccess('aaspe', 'akolagini');
 
 create or replace function newstudents (parID text, parFNAME text, parLNAME text, parCOURSE text) returns text as
 
@@ -113,32 +106,20 @@ create or replace function newstudents (parID text, parFNAME text, parLNAME text
 	language 'plpgsql'
 
 --select newstudents('2013-1364', 'Ailen Grace', 'Aspe', 'BSEC')
-create or replace function newaccesscode(parID text, parHASH text) returns text as
+create or replace function newevent(parevent text, pareventdate date, parid text) returns text as
 	$$
-		declare
+		declare 
 			loc_id text;
 			loc_res text;
 
 		begin
-			loc_id = (select access.studid from access, studentInfo where access.studid= studentInfo.studid);
+			select into loc_id event from events where events.event =parevent;
 
 			if loc_id isnull then
-				insert into access (studid, fingerprint) values (parID, parHASH);
-				loc_res ='OK';
-
-			else
-				loc_res ='Data exists';
-
-			end if;
-				return loc_res;
-		end;
-
+				insert into 
 	$$
-	language 'plpgsql'
 
---select newaccesscode('2013-1364', 'hash')
-
-
+	
 create or replace function newevent(parID text, parEVENT text, parIN text, parOUT text) returns text as
 	$$
 		declare
@@ -146,7 +127,7 @@ create or replace function newevent(parID text, parEVENT text, parIN text, parOU
 			loc_res text;
 
 		begin 
-			loc_id =(select  events.event from events, studentInfo where events.studid=studentInfo.studid and events.event=parEVENT);
+			loc_id =(select  events.event from events, studentInfo where events.studid=studentInfo.studid and events.event=parEVENT and events.studid=parID);
 
 			if loc_id isnull then
 				insert into events (studid, event, eventdate, signin, signout) values (parID, parEVENT, now(), parIN, parOUT);
@@ -160,7 +141,7 @@ create or replace function newevent(parID text, parEVENT text, parIN text, parOU
 		end;
 	$$
 	language 'plpgsql'
---select newevent('2013-1364', 'COE2 Week 2017', 'yes', 'no')
+--select newevent('2013-1364', 'COE Week 2017', 'yes', 'no')
 
 
 create or replace function dropEvent(parEvent text) returns text as
@@ -169,7 +150,7 @@ create or replace function dropEvent(parEvent text) returns text as
 			loc_res text;
 			loc_id text;
 		begin
-			select into loc_id event from events where event =parEvent;
+			select into loc_id event from events where event=parEvent;
 
 			if loc_id isnull then
 				loc_res ='Data not found';
@@ -183,8 +164,9 @@ create or replace function dropEvent(parEvent text) returns text as
 	$$
 	language 'plpgsql';
 
-	--select dropEvent('COE Week 2017');
-create or replace function getevents(in parID text, out text, out text, out text, out timestamp, out text, out text) returns setof record as
+--select dropEvent('COE Week 2017');
+
+create or replace function getevents(in parID text, out text, out text, out text, out date, out text, out text) returns setof record as
 	$$
 		select  studentInfo.firstname, studentInfo.lastname, events.event, events.eventdate, events.signin, events.signout from events, studentInfo where studentInfo.studid = parID and studentInfo.studid = events.studid;
 	$$
@@ -196,6 +178,7 @@ create or replace function getliststudsinevent(in parEvent text, out text, out t
 		select events.studid, studentInfo.course, events.signin, events.signout from studentInfo, events where events.event = parEvent and events.studid =studentInfo.studid;
 	$$
 	language 'sql';
+--select getliststudsinevent('COE Week 2017')
 
 
 create or replace function getstudentdata(in parID text, out text, out text, out text, out text) returns setof record as
@@ -205,4 +188,8 @@ create or replace function getstudentdata(in parID text, out text, out text, out
 	$$
 	language 'sql'
 --select getstudentdata('2013-1364')
-	
+
+create or replace function getlistevents() returns setof record as
+	$$
+		select
+	$$
