@@ -197,7 +197,7 @@ create or replace function getstudentdata(in parID text, out text, out text, out
 	language 'sql'
 --select getstudentdata('2013-1364')
 
-create or replace function getlistevents() returns setof record as
+create or replace function getlistevents(out text, out date) returns setof record as
 	$$
 		select event, eventdate from events;
 	$$

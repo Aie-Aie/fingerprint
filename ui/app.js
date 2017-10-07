@@ -82,11 +82,13 @@ function signin(){
 			
 			if(resp.status == 'Granted'){
 				$('#sform').hide();
-				$('.section').show();
+				
 				showlistevent();
+				
+				$('.section').show();
 				$('.main').show();
-
 			}
+			
 			else{
 			
 				
@@ -102,7 +104,44 @@ function signin(){
 function showlistevent(){
 
 	$.ajax({
+		url: 'http://127.0.0.1:5000/eventlist',
+		type: 'GET',
+		dataType: 'json',
+		success: function(resp)
+		{
+			$('#eventlist').html("");
+			if(resp.status == 'ok'){
+				for(i=0;  i<resp.count; i++)
+				{
+					event = resp.entries[i].event;
+					eventdate= resp.entries[i].eventdate;
 
-
+					$('#eventlist').append(roweventlist(event, eventdate));
+				}
+			}
+			else{
+				$('#eventlist').html("");
+			}
+		},
+		error: function(err)
+		{
+			alert("error1");
+		}
 	});
 }
+
+function roweventlist(event, eventdate)
+{
+	return '<tr>'+
+			'<td>'+event+'</td>'+
+			'<td>'+eventdate+'</td>'+
+			'<td><button type="button" class="btn btn-simple btn-sm" id="modal" data-toggle="modal" data-target="#myModal_openEvent" style="font-size: 12px;">'+				
+				'Open</button>'+
+				'<button type="button" class="btn btn-simple btn-sm" id="modal" data-toggle="modal" data-target="#myModal_editEvent" style="font-size: 12px;">'+									
+				'Edit</button>'+
+				'<button type="button" class="btn btn-simple btn-sm" style="font-size: 12px;">'+			
+				'Delete</button>'+
+			'</td>'+
+			'</tr>';
+}
+
