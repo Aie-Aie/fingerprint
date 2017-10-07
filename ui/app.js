@@ -132,10 +132,10 @@ function showlistevent(){
 
 function roweventlist(event, eventdate)
 {
-	return '<tr>'+
+	return '<tr onclick ="clickabletable(this)">'+
 			'<td>'+event+'</td>'+
 			'<td>'+eventdate+'</td>'+
-			'<td><button type="button" class="btn btn-simple btn-sm" id="modal" data-toggle="modal" data-target="#myModal_openEvent" style="font-size: 12px;">'+				
+			'<td ><button type="button" class="btn btn-simple btn-sm" id="modal" data-toggle="modal" data-target="#myModal_openEvent" style="font-size: 12px;">'+				
 				'Open</button>'+
 				'<button type="button" class="btn btn-simple btn-sm" id="modal" data-toggle="modal" data-target="#myModal_editEvent" style="font-size: 12px;">'+									
 				'Edit</button>'+
@@ -145,3 +145,10 @@ function roweventlist(event, eventdate)
 			'</tr>';
 }
 
+function clickabletable(x){
+	var n= x.rowIndex;
+
+	var data =document.getElementById("data").rows[n].cells[0].innerHTML;
+
+	alert(data);
+}
