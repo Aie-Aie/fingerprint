@@ -1,4 +1,11 @@
+$(function(){
+	$('#event').click(function(){
+		$('.sform').hide();
+		$('.section').show();
+		$('.main').show();
+	});
 
+});
 function showevents()
 {
      var data =$('#idnumber').val();
@@ -62,7 +69,6 @@ function signin(){
 	var uname=$('#admin').val();
 	var pwd= $('#password').val();
 	
-
 	$.ajax({
 		url:'http:127.0.0.1:5000/access',
 		dataType: 'json',
@@ -93,80 +99,10 @@ function signin(){
 	});
 }
 
-function addevent(){
-	var eventname= $('#eventName').val();
-	var eventdate=$('#eventDate').val();
-
-
-/*
-	$.ajax({
-		url: 'http://127.0.0.1:5000/events/'+eventName+'/'+eventdate,
-		dataType: 'json',
-		type: 'GET',
-		success: function(resp){
-
-		},
-		error: function(err){
-
-		}
-
-	});
-*/
-}
-
 function showlistevent(){
 
+	$.ajax({
+
+
+	});
 }
-
-var fileInput = $('#eventFile');
-var uploadButton = $('#upload');
-
-uploadButton.on('click', function() {
-    if (!window.FileReader) {
-        alert('Your browser is not supported')
-    }
-    var input = fileInput.get(0);
-    
-   
-    var reader = new FileReader();
-    if (input.files.length) {
-        var textFile = input.files[0];
-        reader.readAsText(textFile);
-        $(reader).on('load', processFile);
-    } else {
-        alert('Please upload a file before continuing')
-    } 
-});
-
-function processFile(e) {
-    var file = e.target.result,
-        results;
-    if (file && file.length) {
-        results = file.split("\n");
-        console.log(results)
-        //$('#name').val(results[0]);
-       // $('#age').val(results[1]);
-    }
-}
-
-
-function addRowHandlers() {
-    var table = document.getElementById("data");
-    var rows = table.getElementsByTagName("tr");
-    for (i = 0; i < rows.length; i++) {
-        var currentRow = table.rows[i];
-        var createClickHandler = 
-            function(row) 
-            {
-                return function() { 
-                    var cell = row.getElementsByTagName("td")[0];
-                    var id = cell.innerHTML;
-                    alert("id:" + id);
-             };
-            };
-
-        currentRow.onclick = createClickHandler(currentRow);
-    }
-}
-window.onload = addRowHandlers();
-
