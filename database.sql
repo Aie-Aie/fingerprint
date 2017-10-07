@@ -116,10 +116,17 @@ create or replace function newevent(parevent text, pareventdate date, parid text
 			select into loc_id event from events where events.event =parevent;
 
 			if loc_id isnull then
-				insert into 
-	$$
+				insert into events (studid, event, eventdate, signin, signout) values (parid, parevent, pareventdate, '', '');
+				loc_res ='OK';
+			else
+				loc_res ='Data exists';
+			end if;
+				return loc_res;
+		end;
 
-	
+	$$
+	language 'plpgsql'
+
 create or replace function newevent(parID text, parEVENT text, parIN text, parOUT text) returns text as
 	$$
 		declare
@@ -142,6 +149,7 @@ create or replace function newevent(parID text, parEVENT text, parIN text, parOU
 	$$
 	language 'plpgsql'
 --select newevent('2013-1364', 'COE Week 2017', 'yes', 'no')
+select newevent('2013-1364', 'GAKOP 2017', 'yes', 'no')
 
 
 create or replace function dropEvent(parEvent text) returns text as
@@ -191,5 +199,7 @@ create or replace function getstudentdata(in parID text, out text, out text, out
 
 create or replace function getlistevents() returns setof record as
 	$$
-		select
+		select event, eventdate from events;
 	$$
+	language 'sql';
+
