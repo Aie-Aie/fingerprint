@@ -76,6 +76,19 @@ def signin():
     return jsonify({'status': res[0][0]})
 
 
+@app.route('/eventlist', methods =['GET'])
+def getevents():
+    res =spcall('getlistevents()', (), True)
+    if 'Error' in str(res[0][0]):
+        return jsonify({'status':'error', 'message':res[0][0]})
+    recs=[]
+
+    for r in res:
+        recs.append({'studid':r[0], 'firstname':r[1], 'lastname':r[2], 'course':r[3]})
+    return jsonify({'status':'ok', 'entries':recs, 'count':len(recs)})
+
+
+    
 @app.after_request
 def add_cors(resp):
     resp.headers['Access-Control-Allow-Origin'] = flask.request.headers.get('Origin', '*')
