@@ -203,3 +203,4 @@ create or replace function getlistevents(out text, out date) returns setof recor
 	$$
 	language 'sql';
 
+--select getlistevents()
