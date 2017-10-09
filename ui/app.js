@@ -6,6 +6,11 @@ $(function(){
 	});
 
 });
+
+var opendata;
+var editdata;
+var deletedata;
+ 
 function showevents()
 {
      var data =$('#idnumber').val();
@@ -137,20 +142,85 @@ function roweventlist(event, eventdate)
 			'<td>'+eventdate+'</td>'+
 			'<td ><button type="button"  class="btn btn-simple btn-sm" id="modalopendata"  data-toggle="modal" data-target="#myModal_openEvent" style="font-size: 12px;">'+				
 				'Open</button>'+
-				'<button type="button" class="btn btn-simple btn-sm" id="modal" data-toggle="modal" data-target="#myModal_editEvent" style="font-size: 12px;">'+									
+				'<button type="button" class="btn btn-simple btn-sm" id="modaleditdata" data-toggle="modal" data-target="#myModal_editEvent" style="font-size: 12px;">'+									
 				'Edit</button>'+
-				'<button type="button" class="btn btn-simple btn-sm" style="font-size: 12px;">'+			
+				'<button type="button" class="btn btn-simple btn-sm"  id= "deletedata" style="font-size: 12px;">'+			
 				'Delete</button>'+
 			'</td>'+
 			'</tr>';
 }
 
+
+
+
 function clickabletable(x){
+
 	var n= x.rowIndex;
 
 	var data =document.getElementById("data").rows[n].cells[0].innerHTML;
-
 	
+	opendata = document.getElementById('modalopendata');
+	editdata =document.getElementById('modaleditdata');
+	deletedata =document.getElementById('deletedata');
+
+
+	var divopenevent = document.getElementById('myModal_openEvent');
+	divopenevent.style.display ='none';
+	opendata.onclick =function(){
+
+		if (divopenevent.style.display !== 'none'){
+            div.style.display = 'none';
+        }
+
+        else {
+        	$.ajax({
+			//url:'http://127.0.0.1/'
+			success :function(resp){
+				alert(data);
+			},
+			error: function(err){
+				alert("Error");
+			}
+
+			});
+            divopenevent.style.display = 'block';
+        }
+
+
+		
+	}
+
+	editdata.onclick =function(){
+		$.ajax({
+  			success : function(resp){
+  				alert("editdata");
+  			},
+
+  			error: function(err){
+  				alert("edit error");
+  			}
+		});
+	}
+
+	deletedata.onclick=function () {
+		$.ajax({
+			success : function(resp){
+				alert("delete");
+			},
+			error:function(err){
+				alert("delete error");
+			}
+		});
+	}
+/*
+	$(document).ready(function(){
+		$('#modalopendata').live('click', function(){
+
+			alert("data");
+		});
+	});
+*/
+
 }
 
 
