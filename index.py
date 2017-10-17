@@ -76,6 +76,52 @@ def signin():
     return jsonify({'status': res[0][0]})
 
 
+@app.route('/eventliststud/<string:data>', methods=['GET'])
+def getliststuds(data):
+    res =spcall('getliststudsinevent', (data, ), True)
+
+    if 'Error' in str(res[0][0]):
+        return jsonify({'status':'error', 'message':res[0][0]})
+    recs=[]
+
+    for r in res:
+        recs.append({'studid':r[0], 'course':r[1], 'signin':r[2], 'signout':r[3]})
+    return jsonify({'status':'ok', 'entries':recs, 'count':len(recs)})
+
+
+@app.route('/signinlist/<string:data>', methods=['POST'])
+def signinlist(data):
+
+    url ='listofstud/'+data
+    file = open(url,  'r')
+
+    eventname =request.form['ename']
+    date =request.form['date']
+    funct = spcall('newevent', (eventname, date), True)
+    print funct
+
+    for data in file.readlines():
+        res =spcall('signinstud', (data, eventname, date), True)
+        print res
+
+    if 'Error' in str(res[0][0]):
+        return jsonify({'status' :'error', 'message': res[0][0]})
+
+    return jsonify({'status':res[0][0]})
+
+@app.route('/signoutlist/<string:data>', methods=['POST'])
+def signout(data):
+    url ='listofstud/'+data
+    file = open(url,  'r')
+    eventname =request.form['ename']
+    print eventname
+    for data in file.readlines():
+        print data
+        res =spcall('signoutstud', (data, eventname), True)
+        print res
+
+    return jsonify({'status':res[0][0]})
+
 @app.route('/eventlist', methods =['GET'])
 def getevents():
     res =spcall('getlistevents', ())
@@ -86,6 +132,7 @@ def getevents():
     for r in res:
         recs.append({'event':r[0], 'eventdate':r[1]})
     return jsonify({'status':'ok', 'entries':recs, 'count':len(recs)})
+
 
 
 
